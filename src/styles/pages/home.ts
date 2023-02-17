@@ -48,19 +48,24 @@ export const PostContainer = styled('div', {
   gridTemplateColumns: 'repeat(2, 1fr)',
   gap: '2rem',
   margin: '3rem 0',
+
+  a: {
+    textDecoration: 'none',
+  },
 });
 
 export const PostCardContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center',
   gap: '1.25rem',
   background: '$blueGray500',
   borderRadius: 10,
   padding: '2rem',
   border: '2px solid transparent',
   cursor: 'pointer',
+  minHeight: '16.25rem',
+  textAlign: 'left',
 
   p: {
     display: '-webkit-box',
@@ -81,6 +86,7 @@ export const PostCardHeaderContent = styled('div', {
   display: 'flex',
   alignItems: 'flex-start',
   justifyContent: 'space-between',
+  width: '100%',
 
   h2: {
     color: '$gray100',

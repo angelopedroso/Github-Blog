@@ -29,6 +29,11 @@ export const CardHeaderContainer = styled('header', {
     '&:hover': {
       borderBottomColor: '$babyBlue',
     },
+
+    svg: {
+      width: 12,
+      height: 12,
+    },
   },
 });
 

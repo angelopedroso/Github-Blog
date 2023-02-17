@@ -1,2 +1,3 @@
 #GITHUB API KEY
 SECRET_GITHUB_KEY = [your api key];
+GITHUB_USERNAME = [your username];

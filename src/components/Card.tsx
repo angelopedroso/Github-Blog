@@ -13,42 +13,41 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import profileImg from 'public/profile.jpg';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { UserProps } from '@/interface/userInterface';
 
-export function Card() {
+export function Card({ userInfo }: UserProps) {
   return (
     <CardProfileContainer>
       <Image
-        src={profileImg}
+        src={userInfo!.avatarUrl}
         alt="Github Profile Picture"
         width={148}
         height={148}
+        priority
       />
       <CardProfileInfoContainer>
         <CardProfileNameContainer>
-          <h1>Angelo Pedroso</h1>
-          <a href="#">
+          <h1>{userInfo?.name}</h1>
+          <a href={userInfo?.profileUrl} target="_blank" rel="noreferrer">
             GITHUB <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
           </a>
         </CardProfileNameContainer>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur rem
-          unde iure velit, tempora voluptate, dolore vero nostrum et ipsum,
-          nihil dignissimos rerum modi.
-        </p>
+        <p>{userInfo?.bio}</p>
         <CardProfileAboutContainer>
           <span>
             <FontAwesomeIcon icon={faGithub} />
-            angelopedroso
+            {userInfo?.user}
           </span>
           <span>
             <FontAwesomeIcon icon={faBuilding} />
-            Developer
+            {userInfo?.company ? userInfo?.company : 'Untitled Company'}
           </span>
           <span>
             <FontAwesomeIcon icon={faUserGroup} />
-            32 seguidores
+            {userInfo?.totalFollowers === 1
+              ? '1 seguidor'
+              : `${userInfo?.totalFollowers} seguidores`}
           </span>
         </CardProfileAboutContainer>
       </CardProfileInfoContainer>

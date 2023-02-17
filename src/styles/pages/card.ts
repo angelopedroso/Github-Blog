@@ -18,6 +18,7 @@ export const CardProfileContainer = styled('div', {
 export const CardProfileInfoContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
+  flex: 1,
   overflow: 'hidden',
 
   p: {
@@ -37,6 +38,8 @@ export const CardProfileNameContainer = styled('div', {
   },
 
   a: {
+    display: 'flex',
+    alignItems: 'center',
     fontSize: '$sm',
     fontWeight: 'bold',
     textDecoration: 'none',
@@ -50,6 +53,8 @@ export const CardProfileNameContainer = styled('div', {
 
     svg: {
       marginLeft: '.5rem',
+      width: 12,
+      height: 12,
     },
   },
 });
