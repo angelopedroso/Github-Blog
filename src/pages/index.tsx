@@ -1,3 +1,10 @@
+import { Card } from '@/components/Card';
+import { HomeContainer } from '@/styles/pages/home';
+
 export default function Home() {
-  return <h1>FADSFAS</h1>;
+  return (
+    <HomeContainer>
+      <Card />
+    </HomeContainer>
+  );
 }
