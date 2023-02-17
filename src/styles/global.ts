@@ -13,6 +13,10 @@ export const UniversalCss = globalCss({
     '-webkit-font-smoothing': 'antialiased',
   },
 
+  ':focus': {
+    outline: '$babyBlue solid 1.5px',
+  },
+
   'body, input, textarea, button': {
     fontFamily: 'Nunito',
     fontWeight: 400,

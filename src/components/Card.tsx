@@ -3,7 +3,7 @@ import {
   CardProfileContainer,
   CardProfileInfoContainer,
   CardProfileNameContainer,
-} from '@/styles/pages/home';
+} from '@/styles/pages/card';
 import Image from 'next/image';
 import {
   faArrowUpRightFromSquare,

@@ -1,0 +1,2 @@
+#GITHUB API KEY
+SECRET_GITHUB_KEY = [your api key];

@@ -9,7 +9,8 @@ export const Container = styled('div', {
 
 export const Header = styled('header', {
   width: '100%',
-  background: 'linear-gradient(to bottom, #000 10%, $blueGray600 100%)',
+  background:
+    'radial-gradient(ellipse at top, $blueGray600, rgba(20, 88, 156, 0.27) 28%, $blueGray600)',
   padding: '4rem 0 8rem',
   display: 'flex',
   justifyContent: 'center',

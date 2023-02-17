@@ -7,65 +7,90 @@ export const HomeContainer = styled('main', {
   flexDirection: 'column',
 });
 
-export const CardProfileContainer = styled('div', {
-  width: '100%',
-  display: 'flex',
-  gap: '2rem',
-  padding: '2rem 2.5rem',
-  borderRadius: 10,
-  background: '$blueGray600',
-  marginTop: '-5rem',
-  boxShadow: '5px 5px 15px rgba(0, 0, 0, 0.2)',
-
-  img: {
-    borderRadius: 8,
-    objectFit: 'cover',
-  },
-});
-
-export const CardProfileInfoContainer = styled('div', {
+export const SearchContainer = styled('form', {
   display: 'flex',
   flexDirection: 'column',
-  flex: 1,
+  gap: '.75rem',
+  marginTop: '4.5rem',
 
-  p: {
-    marginTop: '0.5rem',
-    lineHeight: 1.6,
+  'input[type = text]': {
+    fontSize: '$md',
+    border: '1px solid $blueGray400',
+    borderRadius: 6,
+    background: '$blueGray800',
+    padding: '.75rem 1rem',
+    color: '$gray100',
+
+    '&::placeholder': {
+      color: '$blueGray300',
+    },
   },
 });
 
-export const CardProfileNameContainer = styled('div', {
+export const SearchHeaderContent = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  fontSize: '$2sm',
 
-  h1: {
-    color: '$gray100',
+  h2: {
+    fontSize: '$xl',
+    fontWeight: 'bold',
   },
 
-  a: {
-    textDecoration: 'none',
-    color: '$babyBlue',
+  span: {
+    color: '$gray400',
   },
 });
 
-export const CardProfileAboutContainer = styled('div', {
+export const PostContainer = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  gap: '2rem',
+  margin: '3rem 0',
+});
+
+export const PostCardContainer = styled('div', {
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'flex-start',
-  gap: '1.5rem',
-  marginTop: '1.5rem',
+  justifyContent: 'center',
+  gap: '1.25rem',
+  background: '$blueGray500',
+  borderRadius: 10,
+  padding: '2rem',
+  border: '2px solid transparent',
+  cursor: 'pointer',
+
+  p: {
+    display: '-webkit-box',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    lineHeight: 1.6,
+    color: '$gray300',
+    WebkitLineClamp: 4,
+    WebkitBoxOrient: 'vertical',
+  },
+
+  '&:hover': {
+    borderColor: '$blueGray300',
+  },
+});
+
+export const PostCardHeaderContent = styled('div', {
+  display: 'flex',
+  alignItems: 'flex-start',
+  justifyContent: 'space-between',
+
+  h2: {
+    color: '$gray100',
+    fontWeight: 'bold',
+    fontSize: '$xl',
+  },
 
   span: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '0.5rem',
-
-    svg: {
-      color: '$blueGray300',
-      width: 18,
-      height: 18,
-    },
+    fontSize: '$2sm',
+    color: '$gray400',
+    whiteSpace: 'nowrap',
   },
 });
