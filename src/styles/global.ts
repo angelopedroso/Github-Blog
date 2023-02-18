@@ -13,6 +13,10 @@ export const UniversalCss = globalCss({
     '-webkit-font-smoothing': 'antialiased',
   },
 
+  'body::-webkit-scrollbar': {
+    display: 'none',
+  },
+
   ':focus': {
     outline: '$babyBlue solid 1.5px',
   },
