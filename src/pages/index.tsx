@@ -1,9 +1,9 @@
-import { Card, Post } from '@/components';
+import { Card, Pagination, Post } from '@/components';
 import { UserProps } from '@/interface/userInterface';
 import { github } from '@/lib/github';
 import {
   HomeContainer,
-  PostContainer,
+  PostHomeContainer,
   SearchContainer,
   SearchHeaderContent,
 } from '@/styles/pages/home';
@@ -62,33 +62,7 @@ export default function Home({ userInfo, userRepos }: UserProps) {
         />
       </SearchContainer>
 
-      <PostContainer>
-        {filteredListRepo.length === 0
-          ? userRepos?.map((repos) => {
-              return (
-                <Post
-                  key={repos.id}
-                  dataRepo={{
-                    name: repos.name,
-                    pushedAt: repos.pushedAt,
-                    description: repos.description,
-                  }}
-                />
-              );
-            })
-          : filteredListRepo.map((repos) => {
-              return (
-                <Post
-                  key={repos.id}
-                  dataRepo={{
-                    name: repos.name,
-                    pushedAt: repos.pushedAt,
-                    description: repos.description,
-                  }}
-                />
-              );
-            })}
-      </PostContainer>
+      <Pagination userRepos={userRepos} filteredList={filteredListRepo} />
     </HomeContainer>
   );
 }

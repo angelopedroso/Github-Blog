@@ -2,3 +2,4 @@
 export * from './Card';
 export * from './CardPost';
 export * from './Post';
+export * from './Pagination';

@@ -1,4 +1,4 @@
-import { styled } from '..';
+import { css, styled } from '..';
 
 export const HomeContainer = styled('main', {
   width: '100%',
@@ -43,7 +43,7 @@ export const SearchHeaderContent = styled('div', {
   },
 });
 
-export const PostContainer = styled('div', {
+export const PostHomeContainer = styled('div', {
   display: 'grid',
   gridTemplateColumns: 'repeat(2, 1fr)',
   gap: '2rem',
@@ -79,6 +79,7 @@ export const PostCardContainer = styled('div', {
 
   '&:hover': {
     borderColor: '$blueGray300',
+    transition: 'border-color 0.2s ease-in-out',
   },
 });
 
@@ -98,5 +99,44 @@ export const PostCardHeaderContent = styled('div', {
     fontSize: '$2sm',
     color: '$gray400',
     whiteSpace: 'nowrap',
+  },
+});
+
+export const pagination = css({
+  listStyle: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '1rem',
+  fontWeight: 'bold',
+  marginBottom: '3rem',
+
+  li: {
+    cursor: 'pointer',
+    borderRadius: 6,
+    background: '$blueGray500',
+
+    '&:hover': {
+      background: '$babyBlue',
+      transition: 'background-color 0.2s ease-out',
+    },
+
+    a: {
+      display: 'flex',
+      padding: '0.5rem 1rem',
+    },
+  },
+
+  'li:first-child, li:last-child': {
+    background: 'transparent',
+
+    '&:hover': {
+      color: '$babyBlue',
+      transition: 'color 0.2s ease-out',
+    },
+  },
+
+  '.selected': {
+    background: '$babyBlue',
   },
 });

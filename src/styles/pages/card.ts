@@ -49,6 +49,7 @@ export const CardProfileNameContainer = styled('div', {
 
     '&:hover': {
       borderBottomColor: '$babyBlue',
+      transition: 'border-color 0.2s ease-in',
     },
 
     svg: {
