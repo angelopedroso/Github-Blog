@@ -1,18 +1,15 @@
-import { Card } from '@/components/Card';
+import { Card, Post } from '@/components';
 import { UserProps } from '@/interface/userInterface';
 import { github } from '@/lib/github';
 import {
   HomeContainer,
-  PostCardContainer,
-  PostCardHeaderContent,
   PostContainer,
   SearchContainer,
   SearchHeaderContent,
 } from '@/styles/pages/home';
-import { formatDistanceToNow } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
+
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
+
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
@@ -69,46 +66,26 @@ export default function Home({ userInfo, userRepos }: UserProps) {
         {filteredListRepo.length === 0
           ? userRepos?.map((repos) => {
               return (
-                <Link key={repos.id} href={`/posts/${repos.id}`}>
-                  <PostCardContainer>
-                    <PostCardHeaderContent>
-                      <h2>{repos.name}</h2>
-                      <span>
-                        {formatDistanceToNow(Date.parse(repos.pushedAt), {
-                          locale: ptBR,
-                          addSuffix: true,
-                        })}
-                      </span>
-                    </PostCardHeaderContent>
-                    <p>
-                      {repos.description
-                        ? repos.description
-                        : 'Repository has no description.'}
-                    </p>
-                  </PostCardContainer>
-                </Link>
+                <Post
+                  key={repos.id}
+                  dataRepo={{
+                    name: repos.name,
+                    pushedAt: repos.pushedAt,
+                    description: repos.description,
+                  }}
+                />
               );
             })
           : filteredListRepo.map((repos) => {
               return (
-                <Link key={repos.id} href={`/posts/${repos.id}`}>
-                  <PostCardContainer>
-                    <PostCardHeaderContent>
-                      <h2>{repos.name}</h2>
-                      <span>
-                        {formatDistanceToNow(Date.parse(repos.pushedAt), {
-                          locale: ptBR,
-                          addSuffix: true,
-                        })}
-                      </span>
-                    </PostCardHeaderContent>
-                    <p>
-                      {repos.description
-                        ? repos.description
-                        : 'Repository has no description.'}
-                    </p>
-                  </PostCardContainer>
-                </Link>
+                <Post
+                  key={repos.id}
+                  dataRepo={{
+                    name: repos.name,
+                    pushedAt: repos.pushedAt,
+                    description: repos.description,
+                  }}
+                />
               );
             })}
       </PostContainer>
@@ -126,21 +103,18 @@ export const getStaticProps: GetStaticProps = async () => {
     }),
     await github.request('GET /users/{username}/repos', {
       username: String(process.env.GITHUB_USERNAME),
+      sort: 'updated',
     }),
   ]);
 
-  const formattedRepos = repoData
-    .map((repos) => {
-      return {
-        id: repos.id,
-        name: repos.name,
-        description: repos.description,
-        pushedAt: repos.pushed_at,
-      };
-    })
-    .sort((a, b) => {
-      return Date.parse(String(b.pushedAt)) - Date.parse(String(a.pushedAt));
-    });
+  const formattedRepos = repoData.map((repos) => {
+    return {
+      id: repos.id,
+      name: repos.name,
+      description: repos.description,
+      pushedAt: repos.pushed_at,
+    };
+  });
 
   return {
     props: {
