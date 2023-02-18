@@ -5,6 +5,14 @@ import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
+interface Commit {
+  data: {
+    days: number[];
+    total: number;
+    week: number;
+  }[];
+}
+
 interface PostProps {
   name: string;
   owner: string;
@@ -57,7 +65,9 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
     }),
   ]);
 
-  const total = commit.data.reduce((acc, curr) => {
+  const totalCommit = commit as Commit;
+
+  const total = totalCommit.data.reduce((acc, curr) => {
     return acc + curr.total;
   }, 0);
 
