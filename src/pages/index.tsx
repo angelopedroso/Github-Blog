@@ -13,12 +13,42 @@ import { formatDistanceToNow } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+
+type FormProps = {
+  searchRepoFilter: string;
+};
+
+interface FilterProp {
+  id: number;
+  name: string;
+  description: string;
+  pushedAt: string;
+}
 
 export default function Home({ userInfo, userRepos }: UserProps) {
+  const { register, reset, handleSubmit } = useForm<FormProps>({
+    defaultValues: {
+      searchRepoFilter: '',
+    },
+  });
+  let [filteredListRepo, setFilteredListRepo] = useState<FilterProp[]>([]);
+
+  function handleSearchRepoFilter(data: FormProps) {
+    if (userRepos) {
+      setFilteredListRepo(
+        userRepos.filter((repo) => repo.name.includes(data.searchRepoFilter))
+      );
+    }
+
+    reset();
+  }
+
   return (
     <HomeContainer>
       <Card userInfo={userInfo} />
-      <SearchContainer>
+      <SearchContainer onSubmit={handleSubmit(handleSearchRepoFilter)}>
         <SearchHeaderContent>
           <h2>Publicações</h2>
           <span>
@@ -28,32 +58,59 @@ export default function Home({ userInfo, userRepos }: UserProps) {
           </span>
         </SearchHeaderContent>
 
-        <input type="text" placeholder="Buscar conteúdo" />
+        <input
+          type="text"
+          placeholder="Buscar conteúdo"
+          {...register('searchRepoFilter')}
+        />
       </SearchContainer>
 
       <PostContainer>
-        {userRepos?.map((repos) => {
-          return (
-            <Link key={repos.id} href={`/posts/${repos.id}`}>
-              <PostCardContainer>
-                <PostCardHeaderContent>
-                  <h2>{repos.name}</h2>
-                  <span>
-                    {formatDistanceToNow(Date.parse(repos.pushedAt), {
-                      locale: ptBR,
-                      addSuffix: true,
-                    })}
-                  </span>
-                </PostCardHeaderContent>
-                <p>
-                  {repos.description
-                    ? repos.description
-                    : 'Repository has no description.'}
-                </p>
-              </PostCardContainer>
-            </Link>
-          );
-        })}
+        {filteredListRepo.length === 0
+          ? userRepos?.map((repos) => {
+              return (
+                <Link key={repos.id} href={`/posts/${repos.id}`}>
+                  <PostCardContainer>
+                    <PostCardHeaderContent>
+                      <h2>{repos.name}</h2>
+                      <span>
+                        {formatDistanceToNow(Date.parse(repos.pushedAt), {
+                          locale: ptBR,
+                          addSuffix: true,
+                        })}
+                      </span>
+                    </PostCardHeaderContent>
+                    <p>
+                      {repos.description
+                        ? repos.description
+                        : 'Repository has no description.'}
+                    </p>
+                  </PostCardContainer>
+                </Link>
+              );
+            })
+          : filteredListRepo.map((repos) => {
+              return (
+                <Link key={repos.id} href={`/posts/${repos.id}`}>
+                  <PostCardContainer>
+                    <PostCardHeaderContent>
+                      <h2>{repos.name}</h2>
+                      <span>
+                        {formatDistanceToNow(Date.parse(repos.pushedAt), {
+                          locale: ptBR,
+                          addSuffix: true,
+                        })}
+                      </span>
+                    </PostCardHeaderContent>
+                    <p>
+                      {repos.description
+                        ? repos.description
+                        : 'Repository has no description.'}
+                    </p>
+                  </PostCardContainer>
+                </Link>
+              );
+            })}
       </PostContainer>
     </HomeContainer>
   );
