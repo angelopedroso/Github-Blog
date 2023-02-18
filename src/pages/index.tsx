@@ -34,8 +34,15 @@ export default function Home({ userInfo, userRepos }: UserProps) {
 
   function handleSearchRepoFilter(data: FormProps) {
     if (userRepos) {
+      if (data.searchRepoFilter.length === 0) {
+        setFilteredListRepo([]);
+        return;
+      }
+
       setFilteredListRepo(
-        userRepos.filter((repo) => repo.name.includes(data.searchRepoFilter))
+        userRepos.filter((repo) =>
+          repo.name.toLowerCase().includes(data.searchRepoFilter)
+        )
       );
     }
 

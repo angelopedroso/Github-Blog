@@ -1,6 +1,4 @@
 import { pagination, PostHomeContainer } from '@/styles/pages/home';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { Post } from './Post';
@@ -14,7 +12,6 @@ interface Repo {
 
 interface ReposProps {
   userRepos?: Repo[];
-
   filteredList: Repo[];
 }
 
@@ -30,47 +27,40 @@ export function Pagination({ userRepos, filteredList }: ReposProps) {
   const itemsPerPage = 4;
 
   useEffect(() => {
-    if (userRepos) {
+    if (filteredList.length > 0) {
       const endOffset = itemOffset + itemsPerPage;
-      setCurrentItems(userRepos?.slice(itemOffset, endOffset));
-      setPageCount(Math.ceil(userRepos?.length / itemsPerPage));
+      setCurrentItems(filteredList.slice(itemOffset, endOffset));
+      setPageCount(Math.ceil(filteredList.length / itemsPerPage));
+    } else if (userRepos) {
+      const endOffset = itemOffset + itemsPerPage;
+      setCurrentItems(userRepos.slice(itemOffset, endOffset));
+      setPageCount(Math.ceil(userRepos.length / itemsPerPage));
     }
-  }, [itemOffset, userRepos]);
+  }, [itemOffset, userRepos, filteredList]);
 
-  // Invoke when user click to request another page.
   const handlePageClick = (event: Paginate) => {
-    const newOffset = (event.selected * itemsPerPage) % userRepos!.length;
-    setItemOffset(newOffset);
+    if (userRepos) {
+      const newOffset = (event.selected * itemsPerPage) % userRepos.length;
+
+      setItemOffset(newOffset);
+    }
   };
 
   return (
     <>
       <PostHomeContainer>
-        {filteredList.length === 0
-          ? currentItems.map((repos) => {
-              return (
-                <Post
-                  key={repos.id}
-                  dataRepo={{
-                    name: repos.name,
-                    pushedAt: repos.pushedAt,
-                    description: repos.description,
-                  }}
-                />
-              );
-            })
-          : filteredList.map((repos) => {
-              return (
-                <Post
-                  key={repos.id}
-                  dataRepo={{
-                    name: repos.name,
-                    pushedAt: repos.pushedAt,
-                    description: repos.description,
-                  }}
-                />
-              );
-            })}
+        {currentItems.map((repos) => {
+          return (
+            <Post
+              key={repos.id}
+              dataRepo={{
+                name: repos.name,
+                pushedAt: repos.pushedAt,
+                description: repos.description,
+              }}
+            />
+          );
+        })}
       </PostHomeContainer>
       <ReactPaginate
         breakLabel="..."

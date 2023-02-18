@@ -48,6 +48,7 @@ export const PostHomeContainer = styled('div', {
   gridTemplateColumns: 'repeat(2, 1fr)',
   gap: '2rem',
   margin: '3rem 0',
+  height: '34.5rem',
 
   a: {
     textDecoration: 'none',
