@@ -32,4 +32,4 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir um problema ou e
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo [LICENSE]`LICENSE` para obter mais informações.
+Este projeto está licenciado sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) para obter mais informações.
